@@ -29,6 +29,7 @@ public:
 
 	//tekent een sneeuwman
 	void draw();
+	virtual ~SneeuwMan();
 };
 
 

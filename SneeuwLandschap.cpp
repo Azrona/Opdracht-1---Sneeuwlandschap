@@ -48,9 +48,14 @@ void SneeuwLandschap::run( MAEvent event )
 	}
 
 
-	//TODO: voeg een sneeuwvlok toe
+	//voeg een sneeuwvlok toe
+	SneeuwVlok* vlok = new SneeuwVlok(rand() % screenWidth, 0);
+	this->sneeuwVlokArray.add(vlok);
 
-	//TODO: laat alle sneeuwvlokken vallen
+	//laat alle sneeuwvlokken vallen
+	for(int i = 0; i < this->sneeuwVlokArray.size(); i++) {
+			this->sneeuwVlokArray[i]->fall(screenHeight - this->sneeuwHoogte);
+		}
 }
 
 
@@ -65,9 +70,27 @@ void SneeuwLandschap::draw()
 	maSetColor( 0xffffff );
 	maFillRect( 0, screenHeight - this->sneeuwHoogte, screenWidth, this->sneeuwHoogte );
 
-	//TODO: teken de sneeuwman
+	//teken de sneeuwman
+	this->sneeuwMan->draw();
 
-	//TODO: teken alle sneeuwvlokken
+
+	//teken alle sneeuwvlokken
+	for(int i = 0; i < this->sneeuwVlokArray.size(); i++)
+	{
+		SneeuwVlok* vlok = this->sneeuwVlokArray[i];
+
+		//Als de vlok niet dood is de vlok tekenen
+		if(!vlok->isDead())
+		{
+			vlok->draw();
+		}
+		//Als de vlok wel dood is verwijderen van de array en zelf ook verwijderen
+		else
+		{
+			this->sneeuwVlokArray.remove(i);
+			delete vlok;
+		}
+	}
 }
 
 

@@ -11,6 +11,7 @@
 
 #include <ma.h>
 #include <MAUtil/Vector.h>
+#include <conprint.h>
 
 
 #include "SneeuwMan.hpp"
